@@ -487,7 +487,21 @@
     document.getElementById("popupOverlay").style.display = "none";
   });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const carouselEl = document.querySelector("#mainCarousel");
+  const carousel = new bootstrap.Carousel(carouselEl, {
+    interval: 2800,
+    ride: false   // 자동 시작 막기
+  });
 
+  // 🔥 2.5초 후에 강제로 시작
+  setTimeout(() => {
+    carousel.cycle();
+  }, 2500);
+});
+</script>
 
 </body>
+
 </html>
