@@ -1,0 +1,961 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ROOMATE Guide</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <style>
+.item-img {
+  width: 350px; /*사진 크기*/
+  height: auto;
+  border-radius: 7px;
+  transition: transform 0.3s ease;  /* 부드러운 애니메이션 */
+}
+
+.item-img:hover {
+  transform: scale(1.05);   /* 5% 확대 */
+}
+
+.qw {
+    display: flex;            /* 가로 배치 */
+    justify-content: center;  /* 가운데 정렬 */
+    gap: 300px;                /* 텍스트 간 간격 */
+    margin-bottom: 50px;
+      margin-top: 40px;     
+    
+}
+
+.qw span {
+     position: relative;       /* 밑줄 기준 잡기 */
+  font-size: 24px;
+    font-weight: 600;
+    text-align: center;       /* 텍스트 가운데 */
+    cursor: pointer;
+    
+}
+
+/* 밑줄 기본 상태 (0%) */
+.qw span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;             /* 글자와 밑줄 사이 여백 */
+    height: 3px;
+    width: 0%;
+    background: #667f58;
+    transition: width .18s ease;
+     left: 50%;
+    transform: translateX(-50%);
+    
+}
+
+/* hover 시 밑줄 100% 확장 */
+.qw span:hover::after {
+    width: 110%;
+}
+
+
+/* 이 밑 사진과 설명 적용 */
+/* 기본 (PC 화면 기준) */
+.item-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+
+  max-width: 965px;   /* 전체 콘텐츠 폭 제한 */
+  margin: 0 auto;     /* 화면 가운데 정렬 */
+  padding: 0 20px;    /* 모바일에서 좌우 여백 */
+  margin-bottom: 80px;
+}
+
+ 
+
+
+
+
+/* ----------------------------------------- */
+/* 📱 모바일 반응형 (화면 768px 이하일 때)   */
+/* ----------------------------------------- */
+@media (max-width: 768px) {
+  .item-box {
+    flex-direction: column;  /* 사진 위 - 텍스트 아래 */
+    align-items: flex-start; /* 모바일에서는 왼쪽 정렬 */
+    gap: 20px;
+  }
+
+  .item-img {
+    width: 100%;             /* 모바일에서는 화면 꽉 채우기 */
+    max-width: 380px;
+  }
+
+  .item-text {
+    max-width: 100%;
+  }
+}
+
+
+   .title {
+
+  margin: 0 auto;     /* 화면 가운데 정렬 */
+  font-size: 50px; 
+font-weight: 800;
+color: #222;
+margin-bottom: 35px;   /* 제목 아래 간격 */
+
+}
+.s{
+  font-size: 24px;
+  font-weight: 800;
+  color: #222;
+
+  display: inline-block;     /* 텍스트 길이만큼만 차지 */
+  padding-bottom: 6px;
+  border-bottom: 3px solid #b59276;  /* 원하는 길이만큼만 밑줄 */
+}
+/* 각 섹션 id에 공통 여백 적용 */
+#b1, #b2, #b3 {
+  scroll-margin-top: 15px; /* 상단에서 떨어진 거리 (px 단위) */
+}
+.qw a {
+  text-decoration: none; /* 밑줄 제거 */
+  color: inherit;        /* 글자 색상 그대로 사용 */
+}
+
+.ch {
+
+  margin: -20px auto 40px; /* 제목이랑 간격 조절 */
+  font-size: 18px;
+  color: #333;
+  line-height: 1.6;
+  padding: 0 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.white-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.6); /* 흐려짐이 아니라 ‘투명한 흰색 덮기’ 느낌 */
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  padding: 40px;
+  color: #333;
+  font-weight: 600;
+  /* max-width 제거 → 전체 넓게 사용 */
+  width: 100%;
+}
+
+.content {
+  padding-top: 120px; /* 글만 아래로 */
+}
+
+
+.so {
+  font-size: 25px;   /* 글자 크기 */
+  font-weight: 700;  /* 굵기 */
+  color: #222;
+  margin-bottom: 18px;
+}
+.soso {
+  font-size: 19px;   /* 글자 크기 */
+  font-weight: 600;  /* 굵기 */
+  color: #222;
+  margin-bottom: 18px;
+}
+
+
+
+.color-recommend-text {
+  font-size: 18px;   /* 원하는 크기로 변경 */
+  font-weight: 500;  /* 굵게(옵션) */
+  color: #222;       /* 색상(옵션) */
+}
+
+
+.content-flex {
+  display: flex;
+  justify-content: space-between; /* 양쪽 배치 */
+  align-items: flex-start; /* 위쪽 맞춤 */
+  gap: 40px;
+}
+
+/* 왼쪽 텍스트 영역 */
+.text-area {
+  flex: 1;
+}
+
+/* 오른쪽 컬러박스 영역 */
+.color-recommend-area {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  flex-shrink: 0; /* 줄어들지 않게 */
+}
+
+.color-box-wrap {
+  display: flex;
+  gap: 10px;
+}
+
+.color-box {
+  width: 110px;
+  height: 70px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.15);
+  border: 2px solid #667f58;
+}
+.color-recommend-area {
+  margin-top: 72px;      /* 아래로 */
+  transform: translateX(-250px);
+}
+/* 2번 전체 섹션 위치 조절 */
+.sub2-section {
+    margin-top: -100px; /* 1번보다 조금만 띄우고 싶다면 값 조절 */
+}
+.cc-section {
+    margin-top: -0px; /* 1번보다 조금만 띄우고 싶다면 값 조절 */
+}
+
+/* ----------------------------------------- */
+/* 📱 모바일 반응형 (화면 768px 이하일 때)   */
+/* ----------------------------------------- */
+@media (max-width: 1500px) {
+  .content-flex {
+    flex-direction: column;   /* 텍스트 위, 컬러 박스 아래 */
+    align-items: flex-start;  /* 왼쪽 정렬 */
+    gap: 20px;                /* 위아래 간격 */
+  }
+
+  .color-recommend-area {
+    transform: translateX(0); /* 모바일에서는 위치 이동 제거 */
+    margin-top: 0;            /* 위쪽 여백 초기화 */
+  }
+
+  .text-area {
+    width: 100%; /* 텍스트 영역 최대 폭 */
+  }
+
+  .color-box-wrap {
+    flex-wrap: wrap; /* 컬러 박스 여러 개 있을 때 줄 바꿈 */
+    gap: 10px;
+  }
+
+  .color-box {
+    width: 100px;
+    height: 60px;
+  }
+
+
+
+
+
+}
+.slider-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 950px; /* 950 → 1100으로 더 크게 */
+  margin: 0 auto;
+  padding: 0 40px; /* 양옆 여백 조금 주기 → 화살표 안정적 */
+}
+
+
+.slider {
+  display: flex;
+  overflow-x: hidden;  /* 좌우 스크롤 숨김 */
+  scroll-behavior: smooth;
+}
+.slide-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 40px;
+  font-weight: 600;
+  color: #3F5D45; /* 딥그린 */
+  cursor: pointer;
+  z-index: 10;
+  padding: 10px;
+}
+
+.slide-btn.left {
+  left: -5px;   /* 왼쪽 버티컬 붙이기 */
+}
+
+.slide-btn.right {
+  right: -5px;  /* 오른쪽 버티컬 붙이기 */
+}
+
+.slide-btn:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+.card-item {
+  min-width: 320px;   /* 300 → 320: 더 강조 */
+  margin: 0 24px;     /* 좌우 여백 넓게 */
+  text-align: center;
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08); /* 부드러운 그림자 */
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.card-item:hover {
+  transform: translateY(-4px);
+}
+
+
+.card-item img {
+  width: 100%;
+  height: 230px; /* 이미지 높이 확실히 키움 */
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+/* 카테고리 라벨 */
+.category-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #667f58;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+@media (max-width: 768px) {
+
+  .slider-wrap {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .slider {
+    margin: 0 !important;
+    width: 100% !important;
+    padding: 0 !important;
+    overflow-x: auto;
+  }
+
+  .card-item {
+    flex: 0 0 100% !important;
+    min-width: 100% !important;
+    margin: 0 !important;
+    border-radius: 0;
+  }
+
+  .card-item img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.youtube-recommend {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 x 2 배치 */
+  gap: 24px; /* 카드 간격 */
+  margin-top: 20px;
+}
+
+/* 카드 전체 스타일 */
+.yt-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;  /* 🔥 밑줄 제거 */
+  color: inherit;         /* 🔥 글자색 유지 */
+}
+
+/* 썸네일 크기 더 키움! */
+.yt-card img {
+  width: 500px;          /* 기존 160px → 180px로 확장 */
+
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* 텍스트 영역 */
+.yt-info h3 {
+  margin: 0 0 6px 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.yt-info p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #444;
+}
+
+/* 호버 시 확대 + 그림자 */
+.yt-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.10);
+}
+
+/* 반응형: 좁은 화면에서는 다시 1열로 정렬 */
+@media (max-width: 1100px) {
+  .youtube-recommend {
+    grid-template-columns: 1fr; /* 한 줄 */
+  }
+
+  .yt-card img {
+    width: 150px; /* 모바일에서는 조금 줄임 */
+  }
+}
+#b3 {
+  margin-top: -50px !important;  /* 원래 80~120px일 경우 강제로 위로 끌어올림 */
+}
+body { margin:0; font-family: 'pretendard', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans KR', 'Helvetica Neue', Arial;
+     background-color: #f8f7f5; }
+
+
+
+
+     /* 스크롤시 나오는 위로 가기 버튼 */
+ #toTopBtn {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 48px;
+  height: 48px;
+  background: transparent; /* 배경 제거 */
+  border: none;            /* 테두리 제거 */
+  display: none;           /* 스크롤 전엔 숨김 */
+  padding: 0;              /* 패딩 제거 */
+  cursor: pointer;
+  z-index: 9999;
+}
+
+#toTopBtn svg {
+  width: 42px;
+  height: 42px;
+  color: #667f58; /* 원하는 아이콘 색 */
+  transition: transform 0.2s; /* hover 시 살짝 커지는 효과 */
+}
+
+#toTopBtn:hover svg {
+  transform: scale(1.1);
+}
+.navbar { border-bottom:1px solid #e5e5e5; background:#e8e3da; padding-top: 18px;   /* 위 여백 */
+  padding-bottom: 18px; /* 아래 여백 */}
+.nav-area {
+  display: flex;
+  gap: 122px;
+  position: relative;
+  max-width: 1500px;   /* mega와 동일한 기준 */
+  margin: 0 auto;      /* 중앙 정렬 */
+  padding-left: 50px; /* mega와 동일 */
+ ;
+  transform: translateX(-9%);
+}
+
+
+
+    .nav-link {
+      position:relative;
+      font-weight:700;
+      padding:10px 20px;
+      color:#222;
+
+    }
+    .nav-link:hover::after {
+      width:100%;
+    }
+    .nav-link::after{
+      content:"";
+      position:absolute;
+      left:0; bottom:0;
+      height:3px;
+      width:0%;
+      background:#667f58;
+      transition: width .18s ease;
+    }
+
+
+
+
+    .mega-col { opacity:0; transform:translateY(6px); transition:.12s; }
+    .mega-col.active { opacity:1; transform:translateY(0); }
+
+    .mega-col h6 { font-size:14px; font-weight:700; margin-bottom:10px; }
+    .mega-col a { display:block; padding:4px 0; color:#333; font-size:14px; text-decoration:none; }
+    .mega-col a:hover { text-decoration:underline; }
+
+    @media(max-width:991px){ .mega-wrap{display:none!important;} }
+
+    /* right icons */
+    .icon-area img { width: 24Px; margin-left:18px; cursor:pointer; }
+    @font-face {
+    font-family: 'Ria';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/RiaSans-ExtraBold.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
+
+/* 특정 단어에만 적용 */
+.special-font {
+    font-family: 'Ria'; font-size: 24px;   margin-left: 7px;   /* ← 값 조절 */
+}
+
+.warp {
+  margin-top: -110px;
+}
+
+.ww {
+  margin-top: -100px;
+}
+.section {
+  margin-left: 40px;
+}
+
+.section-box {
+  max-width: 1100px;
+  margin: 40px auto 40px;
+  padding:  0;          /* 있어도 되고 없어도 됨 */
+
+  background: transparent; /* 🔥 핵심 */
+  border: 3px solid #667f58;
+  border-radius: 12px;
+
+  box-shadow: none;        /* 그림자도 제거 권장 */
+}
+
+.qw {
+  margin-top: 16px;
+  margin-bottom: 20px;
+}
+
+/* 📱 상단 카테고리(qw) 모바일 세로 정렬 */
+@media (max-width: 768px) {
+
+  .qw {
+    flex-direction: column;   /* 가로 → 세로 */
+    align-items: center;
+    gap: 18px;                /* 위아래 간격 */
+  }
+
+  .qw span {
+    font-size: 20px;
+  }
+
+  .qw span::after {
+    bottom: -6px;
+  }
+}
+
+
+
+/* 🔥 화면 작아지면 전부 세로 정렬 */
+@media (max-width: 1199px) {
+
+  /* nav 전체 */
+  .navbar-collapse {
+    background: #f8f7f5;
+    padding: 24px 20px;
+    margin-top: 14px;
+    border-radius: 14px;
+  }
+
+  /* 메뉴 리스트 */
+  .nav-area {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    transform: none;
+    padding-left: 0;
+  }
+
+  /* 메뉴 하나하나 */
+  .nav-link {
+    font-size: 21px;
+    font-weight: 600;
+    padding: 16px 0;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .nav-link:last-child {
+    border-bottom: none;
+  }
+
+  
+}
+/* 섹션 제목 밑줄 */
+.title {
+  position: relative;
+  display: inline-block;   /* 글자 길이만큼만 */
+}
+
+.title::after {
+  content: "";
+  display: block;
+ 
+  height: 4px;            /* 밑줄 두께 */
+  background-color: #667f58;
+  margin-top: 14px;       /* 제목과 밑줄 간격 */
+}
+#b2 {
+  margin-top: 40px;
+}
+
+  </style>
+
+
+</head>
+  <body>
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid px-4">
+<a href="index.html" class="special-font text-decoration-none text-dark">ROOMATE</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+  <div class="nav-area d-flex align-items-center">
+        <a class="nav-link" data-key="basic" href="about.html">About</a>
+        <a class="nav-link" data-key="test" href="test.html" target="_blank" rel="noopener noreferrer">Test</a>
+        <a class="nav-link" data-key="guide" href="guide.html">Guide</a>
+        <a class="nav-link" data-key="community" href="c.html">Community</a>
+        <a class="nav-link" data-key="shop" href="shop.html">Shop</a>
+      </div>
+
+
+
+
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+(function(){
+  const isDesktop = () => window.innerWidth > 991;
+  const navArea = document.querySelector('.nav-area');
+  const megaWrap = document.querySelector('.mega-wrap');
+
+  function showMega(){
+    if(!isDesktop()) return;
+    megaWrap.style.display = 'block';
+
+    // 모든 컬럼 활성화
+    document.querySelectorAll('.mega-col').forEach(col=>{
+      col.classList.add('active');
+    });
+  }
+
+  function hideMega(){
+    megaWrap.style.display = 'none';
+  }
+
+  navArea.addEventListener('mouseenter', showMega);
+  document.querySelector('.navbar').addEventListener('mouseleave', hideMega);
+})();
+
+</script>
+
+
+
+
+
+
+<div class="section-box">
+<div class="qw">
+  <a href="#b1"><span>컬러 원칙</span></a>
+  <a href="#b2"><span>기존 가구</span></a>
+  <a href="#b3"><span>유튜버 추천</span></a>
+</div>
+</div>
+
+
+
+
+<div class="warp">
+<!-- ▶ SECTION 1 : 컬러 원칙 -->
+<div id="b1" class="section">
+
+
+    <!-- 1-1 -->
+    <div class="content content-flex">
+      <div class="text-area">
+        <h1 class="title">&nbsp;컬러원칙&nbsp;</h1>
+        <p class="so">1️⃣ 메인 컬러 1가지 정하기</p>
+        <p class="soso">방 전체 분위기를 결정하는 가장 중요한 컬러 → 벽, 큰 가구, 바닥에 주로 사용</p>
+      </div>
+
+      <div class="color-recommend-area">
+        <div class="color-recommend-text">추천 컬러</div>
+        <div class="color-box-wrap">
+          <div class="color-box" style="background:#F8F8F8;"></div>
+          <div class="color-box" style="background:#C9C4B8;"></div>
+          <div class="color-box" style="background:#AFAFAF;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1-2 -->
+    <div class="content content-flex sub2-section">
+      <div class="text-area">
+        <p class="so">2️⃣ 서브 컬러 1~2가지 선택하기</p>
+        <p class="soso">공간의 안정감 높여주는 컬러 → 커튼, 러그, 패브릭과 같은 중간 비중의 아이템에 사용</p>
+      </div>
+
+      <div class="color-recommend-area cc-section">
+        <div class="color-recommend-text">추천 컬러</div>
+        <div class="color-box-wrap">
+          <div class="color-box" style="background:#9BAF9B;"></div>
+          <div class="color-box" style="background:#c6ad7b;"></div>
+          <div class="color-box" style="background:#87a2c0;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1-3 -->
+    <div class="content content-flex sub2-section">
+      <div class="text-area">
+        <p class="so">3️⃣ 포인트 컬러 1가지 넣기</p>
+        <p class="soso">작은 비중이지만 눈에 띄는 컬러로 분위기 강조 → 액자, 시계, 쿠션, 작은 데코 용품 등에 사용</p>
+      </div>
+
+      <div class="color-recommend-area cc-section">
+        <div class="color-recommend-text">추천 컬러</div>
+        <div class="color-box-wrap">
+          <div class="color-box" style="background:#7A8450;"></div>
+          <div class="color-box" style="background:#3F5D45;"></div>
+          <div class="color-box" style="background:#a65c5b;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1-4 -->
+    <div class="content content-flex sub2-section">
+      <div class="text-area">
+        <p class="so">4️⃣ 컬러 비율 60% : 30% : 10%</p>
+        <p class="soso">중요한 컬러 원칙! 꼭 기억하세요✨</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="ww">
+<!-- 기존 가구 활용법 Section -->
+<div class="content content-flex" id="b2">
+
+  <div class="text-area">
+    <h1 class="title">&nbsp;기존 가구 활용법&nbsp;</h1>
+    <p class="so">지금 있는 가구만으로도 방을 새롭게 만들 수 있어요!</p>
+    <p class="soso">책장, 의자, 행거 등 신박한 활용법을 확인해보세요</p>
+  </div>
+
+  <!-- 카드 슬라이드 전체 영역 -->
+  <div class="slider-wrap">
+    <button class="slide-btn left" onclick="moveSlide(-1)">❮</button>
+
+    <div class="slider" id="slideBox">
+
+      <!-- 카드 1 -->
+      
+
+      <!-- 카드 2 -->
+      <div class="card-item">
+        <span class="category-tag">책장</span>
+        <img src="guidephoto/bb.png">
+        <h3>책장을 눕혀서 = 침대 사이드 테이블</h3>
+        <p>조명·책 올리면 분위기 완성</p>
+      </div>
+     
+     
+      <!-- 카드 3 -->
+      <div class="card-item">
+        <span class="category-tag">의자</span>
+        <img src="guidephoto/sdsd.png">
+        <h3>의자를 협탁으로</h3>
+        <p>책 + 조명 올리면 끝</p>
+      </div>
+
+      <!-- 카드 4 -->
+      <div class="card-item">
+        <span class="category-tag">배치</span>
+        <img src="guidephoto/og.png">
+        <h3>공간 재배치</h3>
+        <p>가구를 벽에만 붙이려고 하지 않기! <br>
+          수납장을 통해 공간 분리하기</p>
+      </div>
+<!-- 카드 2 -->
+<div class="card-item">
+        <span class="category-tag">책장</span>
+        <img src="guidephoto/tv.png">
+        <h3>책장을 눕혀서 TV장</h3>
+        <p>벤치까지 되는 1석 2조 변신</p>
+      </div>
+      <!-- 카드 5 -->
+      <div class="card-item">
+        <span class="category-tag">거울</span>
+        <img src="guidephoto/mi.png">
+        <h3>거울로 공간 확장</h3>
+        <p>거울을 벽 쪽에 배치! 시선이 반사되어 공간이 넓어보이는 효과</p>
+      </div>
+
+      <!-- 카드 6 -->
+      <div class="card-item">
+        <span class="category-tag">수납장</span>
+        <img src="guidephoto/susu.png">
+        <h3>수납장 = 가전 선반</h3>
+        <p>수납장 위, 정수기, 커피머신 올리면 딱!</p>
+      </div>
+
+
+    </div>
+
+    <button class="slide-btn right" onclick="moveSlide(1)">❯</button>
+  </div>
+
+</div>
+
+
+
+
+<!-- ▶ SECTION 3 : 추천 유튜버 -->
+<div class="content content-flex" id="b3">
+
+  <div class="text-area">
+    <h1 class="title">&nbsp;추천 유튜버&nbsp;</h1>
+<p class="so">셀프 인테리어에 도움이 되는 유튜브 채널 &nbsp;<span class="soso">(카드를 클릭하면 유튜브 채널로 이동합니다.)</span>
+</p>
+ <div class="youtube-recommend">
+
+  <!-- 카드 1 -->
+<a href="https://www.youtube.com/@ggyonghouse" target="_blank" class="yt-card">
+  <img src="guidephoto/gggg.png" alt="유튜브 썸네일">
+  <div class="yt-info">
+    <h3>ggyonghouse (굥하우스)</h3>
+    <p>셀프 집 꾸미기 과정을 현실적으로 담아낸 인테리어 브이로그 채널.</p>
+  </div>
+</a>
+
+<!-- 카드 2 -->
+<a href="https://www.youtube.com/@jachinam" target="_blank" class="yt-card">
+  <img src="guidephoto/ja.png" alt="유튜브 썸네일">
+  <div class="yt-info">
+    <h3>자취남</h3>
+    <p>여러 자취방을 방문해 현실적인 자취 팁과 공간 활용 아이디어를 알려주는 인터뷰형 채널</p>
+  </div>
+</a>
+
+<!-- 카드 3 -->
+<a href="https://www.youtube.com/@OhouseKR" target="_blank" class="yt-card">
+  <img src="guidephoto/house.png" alt="유튜브 썸네일">
+  <div class="yt-info">
+    <h3>오늘의 집</h3>
+    <p>다양한 실사용자들의 집 꾸미기 사례와 최신 인테리어 트렌드를 한눈에 소개하는 채널</p>
+  </div>
+</a>
+
+<!-- 카드 4 -->
+<a href="https://www.youtube.com/@0uceo" target="_blank" class="yt-card">
+  <img src="guidephoto/dede.png" alt="유튜브 썸네일">
+  <div class="yt-info">
+    <h3>공대표</h3>
+    <p>공간 구조 분석과 가구 배치 팁을 중심으로 실용적인 인테리어 솔루션을 제공하는 채널</p>
+  </div>
+</a>
+
+
+</div>
+  </div>
+</div>
+
+
+
+
+
+<!-- ▶ SECTION 전환 스크립트 -->
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(sec => {
+    sec.style.display = 'none';
+  });
+  document.getElementById(id).style.display = 'block';
+  window.scrollTo(0, 0);
+}
+</script>
+
+
+<script>
+    function moveSlide(direction) {
+      const slider = document.getElementById("slideBox");
+      slider.scrollLeft += direction * 200;
+    }
+
+    function showSection(id) {
+      document.querySelectorAll('.content').forEach(sec => sec.style.display = 'none');
+      document.getElementById(id).style.display = 'flex';
+    }
+  </script>
+</body>
+
+<!-- 🔼 위로가기 버튼 -->
+<button id="toTopBtn" title="Go to top">
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+       class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+    <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
+  </svg>
+</button>
+
+
+<script>
+  const toTopBtn = document.getElementById("toTopBtn");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      toTopBtn.style.display = "block";
+    } else {
+      toTopBtn.style.display = "none";
+    }
+  });
+
+  toTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  
+</script>
+  
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  </body>
+</html>
