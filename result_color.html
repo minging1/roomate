@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>검사 결과 - 아기자기 데코형</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" 
+          rel="stylesheet">
+
+    <!-- 아이콘 (Bootstrap Icons) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        
+      body {
+        background-color: #e8e3da;
+      }
+      .result-card {
+        max-width: 650px;
+        margin: 60px auto;
+        border-radius: 20px;
+        padding: 30px 40px;
+        background: white;
+        box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+      }
+      .result-image {
+        width: 240px;
+        display: block;
+        margin: 0 auto 15px;
+      }
+      .title {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #6c4b2d;
+      }
+      .sub-title {
+        text-align: center;
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: #b59276;
+        margin-bottom: 30px;
+         line-height: 0.8;
+      }
+      .section-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-top: 25px;
+        margin-bottom: 10px;
+        color: #5b4328;
+      }
+
+      .share-simple {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  font-size: 17px;
+  font-weight: 600;
+  color: #667f58;
+
+  cursor: pointer;
+
+   margin-top: 20px;   /* 🔥 여기 추가 */
+    margin-bottom: 20px;   /* 🔥 아래 요소와 간격 */
+}
+
+.share-simple i {
+  font-size: 20px;
+}
+
+.share-simple:hover {
+  opacity: 0.7;
+}
+
+
+      /* 스크롤시 나오는 위로 가기 버튼 */
+ #toTopBtn {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 48px;
+  height: 48px;
+  background: transparent; /* 배경 제거 */
+  border: none;            /* 테두리 제거 */
+  display: none;           /* 스크롤 전엔 숨김 */
+  padding: 0;              /* 패딩 제거 */
+  cursor: pointer;
+  z-index: 9999;
+}
+
+#toTopBtn svg {
+  width: 42px;
+  height: 42px;
+  color: #667f58; /* 원하는 아이콘 색 */
+  transition: transform 0.2s; /* hover 시 살짝 커지는 효과 */
+}
+
+#toTopBtn:hover svg {
+  transform: scale(1.1);
+}
+
+
+
+
+
+    </style>
+  </head>
+
+  <body>
+
+    <div class="result-card">
+
+      <!-- 이미지 -->
+      <img src="images/ww (3).png" alt="우드 포근형" class="result-image">
+
+      <!-- 제목 -->
+      <div class="title">아기자기 데코형 (Cute & Decor)</div>
+      <div class="sub-title">작은 소품 하나하나에 취향이 묻어나는 꾸미는 재미가 가득한 공간</div>
+
+      <!-- 내용 -->
+      <div>
+        <div class="section-title">🎀스타일 특징</div>
+        <ul>
+          <li>귀엽고 다양한 소품으로 공간을 채우는 데코 중심 스타일</li>
+          <li>패턴·컬러감 있는 패브릭으로 포인트 주기</li>
+          <li>둥글둥글한 형태의 가구와 아기자기한 오브제 활용</li>
+          <li>벽·선반·테이블 위를 감성 소품으로 꾸미는 디스플레이</li>
+
+        </ul>
+
+        <div class="section-title">🐻 잘 맞는 사람</div>
+        <ul>
+          <li>소품 구경·수집이 취미인 사람</li>
+          <li>공간을 꾸미는 과정 자체를 좋아하는 타입</li>
+          <li>집을 나만의 감성으로 가득 채우고 싶은 사람</li>
+        </ul>
+
+        <div class="section-title">🌈 추천 인테리어 요소</div>
+        <ul>
+          <li>인형, 미니 오브제, 액자, 포스터</li>
+          <li>패턴 커튼·러그·쿠션 등 패브릭 아이템</li>
+          <li>선반 위 소품 디스플레이</li>
+          <li>따뜻한 색감의 무드등과 감성 조명</li>
+        </ul>
+      </div>
+
+     
+    </script>
+<!-- 🔼 위로가기 버튼 -->
+<button id="toTopBtn" title="Go to top">
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+       class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+    <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
+  </svg>
+</button>
+
+
+<script>
+  const toTopBtn = document.getElementById("toTopBtn");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      toTopBtn.style.display = "block";
+    } else {
+      toTopBtn.style.display = "none";
+    }
+  });
+
+  toTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+
+<script>
+  function sharePage() {
+    if (navigator.share) {
+      navigator.share({
+        title: '인테리어 취향 테스트',
+        text: '내 인테리어 취향 결과를 확인해보세요!',
+        url: window.location.href
+      });
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      alert('링크가 복사되었습니다 😊');
+    }
+  }
+</script>
+<div class="share-box mt-4 text-center">
+  <div class="share-simple" onclick="sharePage()">
+    <i class="bi bi-upload"></i>
+    <span>공유하기</span>
+  </div>
+</div>
+
+
+<div class="text-center mt-3">
+  <a href="test.html"
+     class="btn px-4 d-inline-flex align-items-center gap-2"
+     style="border: 2px solid #5b4328; color:#5b4328; font-weight:600;">
+     
+    <i class="bi bi-arrow-clockwise"></i>
+    다시 검사하기
+  </a>
+</div>
+
+
+
+
+<div class="mt-3">
+    <a href="index.html" 
+       class="btn btn-lg" 
+       style="background-color: #667f58; color: white; font-weight: 500; font-size: 14px; margin-top: 30px;">
+       🏠 홈으로 돌아가기
+    </a>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
