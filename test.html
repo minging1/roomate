@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>인테리어 취향 검사</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    />
+
+    <style>
+        .result-box {
+    background-color: #667f58; /* 새로운 색 적용 */
+    color: #ffffff; /* 글자가 잘 보이도록 흰색으로 변경 */
+    padding: 16px;
+    border-radius: 8px;
+}
+     .image-options {
+    display: flex;
+    justify-content: space-between; /* 3개 카드 전체 폭 균등 배치 */
+    gap: 8px; /* 카드 간 간격 최소화 */
+}
+
+.image-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    text-align: center;
+    flex: 1; /* 3개 카드가 동일한 비율로 전체 폭 채움 */
+}
+
+.image-option input {
+    display: none; /* 라디오 숨기기 */
+}
+
+.image-option img {
+    width: 100%;       /* 부모 폭에 맞춤 */
+    height: auto;      /* 높이 자동 조절 */
+    aspect-ratio: 1 / 1; /* 정사각형 유지 */
+    object-fit: cover; /* 이미지 잘림 없이 꽉 채움 */
+    border-radius: 10px;
+    border: 3px solid transparent;
+    transition: 0.2s;
+}
+
+
+.image-option input:checked + img {
+    border-color: #667f58; /* 선택 테두리 색 */
+}
+
+.image-option span {
+    margin-top: 6px;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+
+       body { margin:0; font-family: 'pretendard', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans KR', 'Helvetica Neue', Arial;
+     background-color: #f8f7f5; }
+        .question-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+        #result-box {
+            display: none;
+        }
+        /* 기본 라디오 버튼 선택 색 변경 (#667f58) */
+input[type="radio"] {
+    accent-color: #667f58;
+}
+
+
+/* 스크롤시 나오는 위로 가기 버튼 */
+ #toTopBtn {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 48px;
+  height: 48px;
+  background: transparent; /* 배경 제거 */
+  border: none;            /* 테두리 제거 */
+  display: none;           /* 스크롤 전엔 숨김 */
+  padding: 0;              /* 패딩 제거 */
+  cursor: pointer;
+  z-index: 9999;
+}
+
+#toTopBtn svg {
+  width: 42px;
+  height: 42px;
+  color: #667f58; /* 원하는 아이콘 색 */
+  transition: transform 0.2s; /* hover 시 살짝 커지는 효과 */
+}
+
+#toTopBtn:hover svg {
+  transform: scale(1.1);
+}
+
+    </style>
+</head>
+
+<body class="p-4">
+    <div class="container" style="max-width: 720px;">
+        <h2 class="text-center mb-4 fw-bold">🖤인테리어 취향 검사🖤</h2>
+
+        <form id="testForm">
+            <!-- Q1 -->
+            <div class="question-box">
+                <h5>Q1. 집에서 가장 중요하게 생각하는 분위기는?</h5>
+                <div class="mt-2">
+                    <input type="radio" name="q1" value="modern"> 깔끔하고 정돈된 느낌<br>
+                    <input type="radio" name="q1" value="wood"> 따뜻하고 편안한 느낌<br>
+                    <input type="radio" name="q1" value="color"> 컬러나 소품으로 개성 표현하는 느낌
+                </div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="question-box">
+                <h5>Q2. 벽 색깔을 고른다면?</h5>
+                <div class="mt-2">
+                    <input type="radio" name="q2" value="modern"> 화이트·그레이 같은 중립적인 색<br>
+                    <input type="radio" name="q2" value="wood"> 베이지·우드톤과 잘 어울리는 따뜻한 색<br>
+                    <input type="radio" name="q2" value="color"> 포인트 주는 파스텔·비비드 컬러
+                </div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="question-box">
+                <h5>Q3. 가구를 고를 때 가장 먼저 보는 것은?</h5>
+                <div class="mt-2">
+                    <input type="radio" name="q3" value="modern"> 선이 깔끔하고 기능적인 디자인<br>
+                    <input type="radio" name="q3" value="wood"> 소재감(우드·라탄·패브릭 등)<br>
+                    <input type="radio" name="q3" value="color"> 컬러·디자인 독특함 또는 아기자기함
+                </div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="question-box">
+                <h5>Q4. 집 꾸미기 할 때 당신은?</h5>
+                <div class="mt-2">
+                    <input type="radio" name="q4" value="modern"> 꼭 필요한 것만 두는 미니멀파<br>
+                    <input type="radio" name="q4" value="wood"> 조명·우드 소품으로 분위기 살리는 타입<br>
+                    <input type="radio" name="q4" value="color"> 귀여운 소품을 다양하게 배치하는 타입
+                </div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="question-box">
+                <h5>Q5. 거실 테이블을 산다면 어떤 스타일?</h5>
+                <div class="mt-2">
+                    <input type="radio" name="q5" value="modern"> 유리·메탈·화이트 같은 모던 스타일<br>
+                    <input type="radio" name="q5" value="wood"> 우드 톤, 따뜻한 질감<br>
+                    <input type="radio" name="q5" value="color"> 컬러 포인트 / 둥근·아기자기 디자인
+                </div>
+            </div>
+
+           
+
+            <!-- Q6 -->
+            <div class="question-box">
+                <h5>Q6. 집에 친구가 온다면 어떤 반응을 듣고 싶어?</h5>
+                <div class="mt-2">
+                    <input type="radio" name="q7" value="modern"> “정돈돼 있고 깔끔하다!”<br>
+                    <input type="radio" name="q7" value="wood"> “아늑하고 편안하다~”<br>
+                    <input type="radio" name="q7" value="color"> “개성 넘친다! 너 스타일 확실하네!”
+                </div>
+            </div>
+<!-- Q7 -->
+           <div class="question-box">
+    <h5>Q7. 마음에 드는 공간 이미지?</h5>
+  
+    <div class="image-options mt-3">
+        <label class="image-option">
+            <input type="radio" name="q6" value="modern">
+            <img src="testphoto/71.png" alt="깔끔한 무채색 공간">
+            <span>깔끔한 무채색 공간</span>
+        </label>
+
+        <label class="image-option">
+            <input type="radio" name="q6" value="wood">
+            <img src="testphoto/72.png" alt="우드·따뜻한 조명 공간">
+            <span>우드·따뜻한 조명 공간</span>
+        </label>
+
+        <label class="image-option">
+            <input type="radio" name="q6" value="color">
+            <img src="testphoto/73.png" alt="컬러·소품이 살아있는 공간">
+            <span>컬러·소품이 살아있는 공간</span>
+        </label>
+    </div>
+</div>
+            <!-- Submit -->
+             <div class="text-center">
+            <button class="btn btn-lg mt-3" type="button" onclick="calculateResult()"
+        style="background-color: #667f58; border-color: #667f58; color: white; font-weight: 700;">
+    결과 보기
+</button>
+
+
+            </div>
+        </form>
+
+        <!-- 결과 박스 -->
+        <div id="result-box" class="question-box mt-4 text-center">
+           
+            <p id="result-text" class="mt-3 fs-5"></p>
+        </div>
+
+    </div>
+
+    <script>
+function calculateResult() {
+  const form = document.getElementById("testForm");
+
+  // ✅ 필수 질문 name 목록
+  const requiredQuestions = ["q1", "q2", "q3", "q4", "q5", "q6", "q7"];
+
+  // 하나라도 체크 안 된 질문이 있는지 확인
+  for (let q of requiredQuestions) {
+    if (!form.querySelector(`input[name="${q}"]:checked`)) {
+      alert("⚠️ 모든 문항을 선택해야 결과를 볼 수 있어요!");
+      return; // ❌ 여기서 함수 종료 → 페이지 이동 안 됨
+    }
+  }
+
+  // ✅ 여기까지 왔다는 건 전부 선택 완료
+  const formData = new FormData(form);
+
+  let score = {
+    modern: 0,
+    wood: 0,
+    color: 0
+  };
+
+  for (let [, value] of formData.entries()) {
+    score[value]++;
+  }
+
+  let highest = Object.keys(score).reduce((a, b) =>
+    score[a] > score[b] ? a : b
+  );
+
+  // 결과 페이지 이동
+  if (highest === "modern") {
+    window.location.href = "result_mordern.html";
+  } else if (highest === "wood") {
+    window.location.href = "result_wood.html";
+  } else {
+    window.location.href = "result_color.html";
+  }
+}
+</script>
+
+
+
+
+
+
+<!-- 🔼 위로가기 버튼 -->
+<button id="toTopBtn" title="Go to top">
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+       class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+    <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
+  </svg>
+</button>
+
+
+<script>
+  const toTopBtn = document.getElementById("toTopBtn");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      toTopBtn.style.display = "block";
+    } else {
+      toTopBtn.style.display = "none";
+    }
+  });
+
+  toTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+
+
+<div class="mt-3">
+    <a href="index.html" 
+       class="btn btn-lg" 
+       style="background-color: #667f58; color: white; font-weight: 500; font-size: 17px; margin-top: 10px;">
+       🏠 홈으로 돌아가기
+    </a>
+</div>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
