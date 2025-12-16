@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ROOMATE</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+
+ /* 스크롤시 나오는 위로 가기 버튼 */
+ #toTopBtn {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 48px;
+  height: 48px;
+  background: transparent; /* 배경 제거 */
+  border: none;            /* 테두리 제거 */
+  display: none;           /* 스크롤 전엔 숨김 */
+  padding: 0;              /* 패딩 제거 */
+  cursor: pointer;
+  z-index: 9999;
+}
+
+#toTopBtn svg {
+  width: 42px;
+  height: 42px;
+  color: #667f58; /* 원하는 아이콘 색 */
+  transition: transform 0.2s; /* hover 시 살짝 커지는 효과 */
+}
+
+#toTopBtn:hover svg {
+  transform: scale(1.1);
+}
+
+
+    /* 인테리어 스타일 이미지 둥글게 */
+.style-big-img {
+  border-radius: 18px;
+  height: 320px;         /* 🔥 크기 크게 */
+  object-fit: cover;      /* 비율 유지하며 꽉 차도록 */
+  display: block;
+}
+
+
+
+
+
+    body { margin:0; font-family: 'pretendard', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans KR', 'Helvetica Neue', Arial;
+     background-color: #f8f7f5; }
+    .navbar { border-bottom:1px solid #e5e5e5; background:#e8e3da; padding-top: 18px;   /* 위 여백 */
+  padding-bottom: 18px; /* 아래 여백 */}
+.nav-area {
+  display: flex;
+  gap: 122px;
+  position: relative;
+  max-width: 1500px;   /* mega와 동일한 기준 */
+  margin: 0 auto;      /* 중앙 정렬 */
+  padding-left: 50px; /* mega와 동일 */
+ ;
+  transform: translateX(-9%);
+}
+
+
+
+    .nav-link {
+      position:relative;
+      font-weight:700;
+      padding:10px 20px;
+      color:#222;
+
+    }
+    .nav-link:hover::after {
+      width:100%;
+    }
+    .nav-link::after{
+      content:"";
+      position:absolute;
+      left:0; bottom:0;
+      height:3px;
+      width:0%;
+      background:#667f58;
+      transition: width .18s ease;
+    }
+ 
+
+
+    .mega-col { opacity:0; transform:translateY(6px); transition:.12s; }
+    .mega-col.active { opacity:1; transform:translateY(0); }
+
+    .mega-col h6 { font-size:14px; font-weight:700; margin-bottom:10px; }
+    .mega-col a { display:block; padding:4px 0; color:#333; font-size:14px; text-decoration:none; }
+    .mega-col a:hover { text-decoration:underline; }
+
+
+    
+
+    /* right icons */
+    .icon-area img { width: 24Px; margin-left:18px; cursor:pointer; }
+    @font-face {
+    font-family: 'Ria';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/RiaSans-ExtraBold.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
+
+/* 특정 단어에만 적용 */
+.special-font {
+    font-family: 'Ria'; font-size: 24px;   margin-left: 7px;   /* ← 값 조절 */
+}
+
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 3rem;          /* 동그라미 너비를 기본보다 크게 */
+  height: 3rem;         /* 동그라미 높이도 크게 */
+  background-size: 100%, 100%;  /* 배경 이미지(아이콘)가 동그라미에 꽉 차도록 */
+  border-radius: 50%;    /* 동그라미 형태 유지 */
+  background-color: rgba(102, 127, 80, 0.7); /* 배경색 반투명 */
+  border: 2px solid #667f58;   /* 테두리 강조 */
+}
+.carousel-control-prev:hover .carousel-control-prev-icon,
+.carousel-control-next:hover .carousel-control-next-icon {
+  background-color: rgba(102, 127, 80, 1); /* 마우스 올리면 배경 진하게 */
+}
+
+/* 팝업 전체 배경 */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+/* 팝업 박스 */
+.popup-box {
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  width: 360px;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+}
+
+/* 이미지 */
+.popup-img {
+  width: 100%;
+  display: block;
+}
+
+/* 하단 부분 */
+.popup-bottom {
+  padding: 14px 16px;
+  font-size: 14px;
+}
+
+/* 오늘 하루 보지 않기 */
+.dont-show input {
+  width: 18px;
+  height: 18px;
+}
+
+/* 닫기 버튼 */
+.close-btn {
+  border: none;
+  background: #667f58;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.close-btn:hover {
+  background: #536749;
+}
+
+.dont-show input {
+  width: 18px;
+  height: 18px;
+  accent-color: #667f58; /* 체크 시 색상 */
+}
+
+
+/* 🔥 화면 작아지면 전부 세로 정렬 */
+@media (max-width: 1199px) {
+
+  /* nav 전체 */
+  .navbar-collapse {
+    background: #f8f7f5;
+    padding: 24px 20px;
+    margin-top: 14px;
+    border-radius: 14px;
+  }
+
+  /* 메뉴 리스트 */
+  .nav-area {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    transform: none;
+    padding-left: 0;
+  }
+
+  /* 메뉴 하나하나 */
+  .nav-link {
+    font-size: 21px;
+    font-weight: 600;
+    padding: 16px 0;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .nav-link:last-child {
+    border-bottom: none;
+  }
+
+ 
+}
+
+
+  </style>
+  
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid px-4">
+<a href="index.html" class="special-font text-decoration-none text-dark">ROOMATE</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+  <div class="nav-area d-flex align-items-center">
+        <a class="nav-link" data-key="basic" href="about.html">About</a>
+        <a class="nav-link" data-key="test" href="test.html" target="_blank" rel="noopener noreferrer">Test</a>
+        <a class="nav-link" data-key="guide" href="guide.html">Guide</a>
+        <a class="nav-link" data-key="community" href="c.html">Community</a>
+        <a class="nav-link" data-key="shop" href="shop.html">Shop</a>
+      </div>
+
+
+
+
+   
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+(function(){
+  const isDesktop = () => window.innerWidth > 991;
+  const navArea = document.querySelector('.nav-area');
+  const megaWrap = document.querySelector('.mega-wrap');
+
+  function showMega(){
+    if(!isDesktop()) return;
+    megaWrap.style.display = 'block';
+
+    // 모든 컬럼 활성화
+    document.querySelectorAll('.mega-col').forEach(col=>{
+      col.classList.add('active');
+    });
+  }
+
+  function hideMega(){
+    megaWrap.style.display = 'none';
+  }
+
+  navArea.addEventListener('mouseenter', showMega);
+  document.querySelector('.navbar').addEventListener('mouseleave', hideMega);
+})();
+
+</script>
+
+
+<!-- 슬라이드 배너 영역 -->
+<div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+
+  <!-- 인디케이터(동그라미 버튼) -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2"></button>
+  </div>
+
+  <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2500">
+
+  <!-- 슬라이드 이미지 -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="images/t3.png" class="d-block w-100" alt="배너1">
+    </div>
+    <div class="carousel-item">
+      <img src="images/t22.png" class="d-block w-100" alt="배너2">
+    </div>
+    <div class="carousel-item">
+      <img src="images/this.png" class="d-block w-100" alt="배너3">
+    </div>
+  </div>
+
+  <!-- 좌우 버튼 -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+
+  <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+
+</div>
+
+</div>
+<!-- 테스트 하러가기 + 인기 게시물 섹션 -->
+<section class="container my-5">
+
+  <!-- 테스트 하러가기 버튼 / 배너 -->
+  <div class="mb-5 text-center">
+  <a href="test.html"  target="_blank"
+     class="btn px-5 py-3 fs-4 fw-bold rounded-3"
+     style="background-color: rgba(102, 127, 80, 0.5); color: #000000;">
+    🏠 인테리어 취향 테스트 하러가기 →
+  </a>
+</div>
+
+
+
+  <!-- 커뮤니티 인기 게시물 -->
+  <h3 class="mb-4 fw-bold">🔥 커뮤니티 인기 게시물</h3>
+
+  <div class="row g-4">
+    <!-- 카드 1 -->
+    <div class="col-6 col-md-4 col-lg-3">
+       <a href="c.html" class="text-decoration-none text-dark">
+      <div class="card h-100 shadow-sm">
+        <img src="communityphoto/c1.png" class="card-img-top" alt="게시물 이미지">
+        <div class="card-body">
+          <h6 class="card-title fw-semibold">인테리어 가성비 꿀팁</h6>
+          <p class="card-text text-muted small">조회수 3,842 · 댓글 675</p>
+        </div>
+      </div>
+      </a>
+    </div>
+
+    <!-- 카드 2 -->
+    <div class="col-6 col-md-4 col-lg-3">
+       <a href="c.html" class="text-decoration-none text-dark">
+      <div class="card h-100 shadow-sm">
+        <img src="communityphoto/c2.png" class="card-img-top" alt="게시물 이미지">
+        <div class="card-body">
+          <h6 class="card-title fw-semibold">자취 3년차 책상 배치 공유</h6>
+          <p class="card-text text-muted small">조회수 2,510 · 댓글 45</p>
+        </div>
+      </div></a>
+      </div>
+<!-- 카드 3 -->
+    <div class="col-6 col-md-4 col-lg-3">
+       <a href="c.html" class="text-decoration-none text-dark">
+      <div class="card h-100 shadow-sm">
+        <img src="communityphoto/c3.png" class="card-img-top" alt="게시물 이미지">
+        <div class="card-body">
+          <h6 class="card-title fw-semibold">우드 포근형! 인테리어 취향 검사 결과</h6>
+          <p class="card-text text-muted small">조회수 1572 · 댓글 57</p>
+        </div>
+      </div></a>
+      </div>
+      <!-- 카드 3 -->
+    <div class="col-6 col-md-4 col-lg-3">
+       <a href="c.html" class="text-decoration-none text-dark">
+      <div class="card h-100 shadow-sm">
+        <img src="communityphoto/c4.png" class="card-img-top" alt="게시물 이미지">
+        <div class="card-body">
+          <h6 class="card-title fw-semibold">ROOMATE와 함께</h6>
+          <p class="card-text text-muted small">조회수 425 · 댓글 24</p>
+        </div>
+      </div></a>
+      </div>
+      <!-- 인테리어 스타일 이미지 섹션 -->
+<section class="container my-5">
+  <h3 class="mb-4 fw-bold">✨ 인테리어 스타일</h3>
+
+  <div class="row g-4 interior-style">
+
+    <div class="col-12 col-md-6 col-lg-4">
+      <img src="images/ab.png" class="style-big-img w-100" alt="인테리어 스타일 1">
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4">
+      <img src="images/ab1.png" class="style-big-img w-100" alt="인테리어 스타일 2">
+    </div>
+<div class="col-12 col-md-6 col-lg-4">
+      <img src="images/ab2.png" class="style-big-img w-100" alt="인테리어 스타일 3">
+    </div>
+    <div class="col-12 col-md-6 col-lg-4">
+      <img src="images/ab3.png" class="style-big-img w-100" alt="인테리어 스타일 4">
+    </div>
+ <div class="col-12 col-md-6 col-lg-4">
+      <img src="images/ab4.png" class="style-big-img w-100" alt="인테리어 스타일 5">
+    </div>
+ <div class="col-12 col-md-6 col-lg-4">
+      <img src="images/ab5.png" class="style-big-img w-100" alt="인테리어 스타일 6">
+    </div>
+ 
+  </div>
+</section>
+
+<!-- 🔼 위로가기 버튼 -->
+<button id="toTopBtn" title="Go to top">
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+       class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+    <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
+  </svg>
+</button>
+
+
+<script>
+  const toTopBtn = document.getElementById("toTopBtn");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      toTopBtn.style.display = "block";
+    } else {
+      toTopBtn.style.display = "none";
+    }
+  });
+
+  toTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+<!-- 🔥 이미지 팝업 -->
+<div id="popupOverlay" class="popup-overlay">
+  <div class="popup-box">
+
+    <!-- 팝업 이미지 -->
+    <img src="pop.png" class="popup-img" alt="팝업 이미지">
+
+    <!-- 하단 영역 -->
+    <div class="popup-bottom d-flex justify-content-between align-items-center">
+
+      <!-- 오늘 하루 보지 않기 -->
+      <label class="dont-show d-flex align-items-center">
+        <input type="checkbox" id="dontShowToday">
+        <span class="ms-2">오늘 하루 보지 않기</span>
+      </label>
+
+      <!-- 닫기 -->
+      <button id="popupClose" class="close-btn">닫기</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // 쿠키 저장
+  function setCookie(name, value, days) {
+    let date = new Date();
+    date.setDate(date.getDate() + days);
+    document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
+  }
+
+  // 쿠키 읽기
+  function getCookie(name) {
+    let value = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
+    return value ? value[2] : null;
+  }
+
+  // 이미 오늘 하루 보지 않기 쿠키가 있으면 팝업 숨기기
+ if (getCookie("hidePopupToday") === "yes") {
+    document.getElementById("popupOverlay").style.display = "none";
+  }
+
+  // 닫기 버튼 클릭
+  document.getElementById("popupClose").addEventListener("click", function () {
+    if (document.getElementById("dontShowToday").checked) {
+      setCookie("hidePopupToday", "yes", 1);  // 1일 동안 숨김
+    }
+    document.getElementById("popupOverlay").style.display = "none";
+  });
+</script>
+
+
+</body>
+</html>
