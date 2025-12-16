@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ROOMATE About</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+
+
+    
+  .img-row {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    justify-content: center;
+ margin-bottom: 50px;   /* ← 사진 아래 여백 추가 */
+   margin-top: 50px;
+  }
+
+/* 공통 */
+.img-row img {
+ width: 450px;      /* 가로 크기 */
+  height: auto;      /* 비율 유지 */
+  object-fit: cover;
+ transition: transform 0.3s ease; 
+}
+ /* 마우스 가져다 댔을 때 확대 효과 */
+.img-row img:hover {
+  transform: scale(1.02);            /* 살짝 확대 */
+}
+
+/* 각각 색 다르게 + 두께 7px */
+.img-left {
+  border: 7px solid #667f58;
+}
+
+.img-middle {
+  border: 7px solid #644b2f;
+}
+
+.img-right {
+  border: 7px solid #667f58;
+}
+
+/*설명*/
+.title {
+  max-width: 965px;   /* 박스의 너비를 제한 */
+  margin: 0 auto;     /* 화면 가운데 정렬 */
+  font-size: 24px; 
+font-weight: 800;
+color: #222;
+margin-bottom: 12px;   /* 제목 아래 간격 */
+padding-bottom: 10px;   /* 선과 텍스트 사이 여백 */
+ border-bottom: 3.8px solid #4e6b47;
+}
+
+.title1 {
+  max-width: 965px;   /* 박스의 너비를 제한 */
+  margin: 0 auto;     /* 화면 가운데 정렬 */
+  font-size: 24px; 
+font-weight: 800;
+color: #222;
+margin-bottom: 12px;   /* 제목 아래 간격 */
+padding-bottom: 10px;   /* 선과 텍스트 사이 여백 */
+ border-bottom: 3.8px solid #644b2f;
+}
+
+.text {
+  max-width: 940px;   /* 박스의 너비를 제한 */
+  margin: 0 auto;     /* 화면 가운데 정렬 */
+ font-size: 16.5px;
+color: #333;
+margin-bottom: 40px;   /* 섹션들 간 간격 */
+ line-height: 1.8;   /* ✨ 줄 간격 추가 */
+}
+
+.maptext {
+  max-width: 940px;   /* 박스의 너비를 제한 */
+  margin: 0 auto;     /* 화면 가운데 정렬 */
+ font-size: 19px;
+color: #333;
+margin-bottom: 20px;   /* 섹션들 간 간격 ->화랑대와 네이버지도바로가기 간격 */
+ line-height: 1.8;   /* ✨ 줄 간격 추가 */
+  text-align: center; /* 기존 스타일 유지하면서 가운데 정렬 */
+}
+
+/*지도 이미지*/
+#map {
+  display: block;       /* <-- 추가!! */
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  margin: 0 auto;       /* 가운데 정렬 */
+    margin: 10px auto 10px; /* 위쪽 0, 좌우 auto, 아래쪽 30px 여백 */
+}
+
+/* 각 섹션 id에 공통 여백 적용 */
+#e1, #e2, #e3 {
+  scroll-margin-top: 15px; /* 상단에서 떨어진 거리 (px 단위) */
+}
+
+    body { margin:0; font-family: 'pretendard', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans KR', 'Helvetica Neue', Arial;
+     background-color: #f8f7f5; }
+
+
+
+     /* 스크롤시 나오는 위로 가기 버튼 */
+ #toTopBtn {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 48px;
+  height: 48px;
+  background: transparent; /* 배경 제거 */
+  border: none;            /* 테두리 제거 */
+  display: none;           /* 스크롤 전엔 숨김 */
+  padding: 0;              /* 패딩 제거 */
+  cursor: pointer;
+  z-index: 9999;
+}
+
+#toTopBtn svg {
+  width: 42px;
+  height: 42px;
+  color: #667f58; /* 원하는 아이콘 색 */
+  transition: transform 0.2s; /* hover 시 살짝 커지는 효과 */
+}
+
+#toTopBtn:hover svg {
+  transform: scale(1.1);
+}
+
+
+
+.navbar { border-bottom:1px solid #e5e5e5; background:#e8e3da; padding-top: 18px;   /* 위 여백 */
+  padding-bottom: 18px; /* 아래 여백 */}
+.nav-area {
+  display: flex;
+  gap: 122px;
+  position: relative;
+  max-width: 1500px;   /* mega와 동일한 기준 */
+  margin: 0 auto;      /* 중앙 정렬 */
+  padding-left: 50px; /* mega와 동일 */
+ ;
+  transform: translateX(-9%);
+}
+
+
+
+    .nav-link {
+      position:relative;
+      font-weight:700;
+      padding:10px 20px;
+      color:#222;
+
+    }
+    .nav-link:hover::after {
+      width:100%;
+    }
+    .nav-link::after{
+      content:"";
+      position:absolute;
+      left:0; bottom:0;
+      height:3px;
+      width:0%;
+      background:#667f58;
+      transition: width .18s ease;
+    }
+
+
+
+
+    .mega-col { opacity:0; transform:translateY(6px); transition:.12s; }
+    .mega-col.active { opacity:1; transform:translateY(0); }
+
+    .mega-col h6 { font-size:14px; font-weight:700; margin-bottom:10px; }
+    .mega-col a { display:block; padding:4px 0; color:#333; font-size:14px; text-decoration:none; }
+    .mega-col a:hover { text-decoration:underline; }
+
+    @media(max-width:991px){ .mega-wrap{display:none!important;} }
+
+    /* right icons */
+    .icon-area img { width: 24Px; margin-left:18px; cursor:pointer; }
+    @font-face {
+    font-family: 'Ria';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/RiaSans-ExtraBold.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
+
+/* 특정 단어에만 적용 */
+.special-font {
+    font-family: 'Ria'; font-size: 24px;   margin-left: 7px;   /* ← 값 조절 */
+}
+/* 📱 메인 화면 세로 버전 */
+@media (max-width: 991px) {
+
+  .img-row {
+    flex-direction: column;   /* 가로 → 세로 */
+    align-items: center;
+    gap: 30px;
+  }
+
+  .img-row img {
+    width: 90%;               /* 화면에 맞게 */
+    max-width: 420px;         /* 너무 커지지 않게 */
+  }
+}
+
+
+
+/* 🔥 화면 작아지면 전부 세로 정렬 */
+@media (max-width: 1199px) {
+
+  /* nav 전체 */
+  .navbar-collapse {
+    background: #f8f7f5;
+    padding: 24px 20px;
+    margin-top: 14px;
+    border-radius: 14px;
+  }
+
+  /* 메뉴 리스트 */
+  .nav-area {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    transform: none;
+    padding-left: 0;
+  }
+
+  /* 메뉴 하나하나 */
+  .nav-link {
+    font-size: 21px;
+    font-weight: 600;
+    padding: 16px 0;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .nav-link:last-child {
+    border-bottom: none;
+  }
+
+ 
+}
+
+  </style>
+
+
+</head>
+  <body>
+    <nav class="navbar navbar-expand-lg">
+  <div class="container-fluid px-4">
+<a href="index.html" class="special-font text-decoration-none text-dark">ROOMATE</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+  <div class="nav-area d-flex align-items-center">
+        <a class="nav-link" data-key="basic" href="about.html">About</a>
+        <a class="nav-link" data-key="test" href="test.html" target="_blank" rel="noopener noreferrer">Test</a>
+        <a class="nav-link" data-key="guide" href="guide.html">Guide</a>
+        <a class="nav-link" data-key="community" href="c.html">Community</a>
+        <a class="nav-link" data-key="shop" href="shop.html">Shop</a>
+      </div>
+
+
+</nav>
+
+
+<script>
+(function(){
+  const isDesktop = () => window.innerWidth > 991;
+  const navArea = document.querySelector('.nav-area');
+  const megaWrap = document.querySelector('.mega-wrap');
+
+  function showMega(){
+    if(!isDesktop()) return;
+    megaWrap.style.display = 'block';
+
+    // 모든 컬럼 활성화
+    document.querySelectorAll('.mega-col').forEach(col=>{
+      col.classList.add('active');
+    });
+  }
+
+  function hideMega(){
+    megaWrap.style.display = 'none';
+  }
+
+  navArea.addEventListener('mouseenter', showMega);
+  document.querySelector('.navbar').addEventListener('mouseleave', hideMega);
+})();
+
+</script>
+<!--사진-->
+<div class="img-row"> 
+<a href="#e1">
+<img src="aboutphoto/ab1.png" alt="이미지1" class="img-left">
+</a>
+<a href="#e2">
+<img src="aboutphoto/ab2.png" alt="이미지2" class="img-middle">
+</a>
+<a href="#e3">
+<img src="aboutphoto/ab3.png" alt="이미지3" class="img-right">
+</a> 
+</div>
+
+<!--설명-->
+<h2 class="title" id="e1">&nbsp;인사말</h2>
+<p class="text">
+  ROOMATE는 입문자를 위한 맞춤형 셀프 인테리어 플랫폼입니다.<br>
+  처음이라서 더 필요한 인테리어 가이드, ROOMATE가 함께 하겠습니다.<br>
+  - 대표 이수민 드림 -
+</p>
+
+<h2 class="title1"  id="e2">&nbsp;설립 배경</h2>
+<p class="text">
+  최근 재택근무와 생활 방식의 변화로 집은 단순한 거주 공간을 넘어 자기표현의 영역으로 중요해지고 있습니다.<br>
+그러나 인테리어 초보자들은 기초 지식의 부족과 정보의 분산으로 인해 셀프 인테리어에 진입하는 데 어려움을 겪고 있습니다.<br>
+이에 ROOMATE는 초보자도 쉽게 자신의 취향을 파악하고, 적용할 수 있는 셀프 엔티리어 통합 플랫폼을 기획하게 되었습니다.
+</p>
+
+<h2 class="title" id="e3">&nbsp;회사 위치</h2>
+<a href="https://map.naver.com/p/entry/place/33134080" target="_blank">
+ <img id="map" src="aboutphoto/map1.png" alt="지도">
+ </a>
+ <p class="maptext">
+  <i class="bi bi-geo-fill" style= "color: #644b2f; font-size: 20px;"></i> 서울여자대학교 50주년기념관: 서울 노원구 화랑로 621 <br>
+  <i class="bi bi-6-circle-fill" style="color: #c4733d;"></i> 화랑대역 4번 출구에서 1.1km
+</p>
+
+<p class="text text-center">
+  <a href="https://map.naver.com/p/entry/place/33134080" target="_blank" style="text-decoration: underline; color: #667f58; font-weight: 500; font-size: 23px;">
+    <i class="bi bi-geo-alt-fill me-2" style="font-size: 25px; vertical-align: middle;"></i>네이버 지도 바로가기
+  </a>
+</p>
+
+<!-- 🔼 위로가기 버튼 -->
+<button id="toTopBtn" title="Go to top">
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+       class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+    <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
+  </svg>
+</button>
+
+
+<script>
+  const toTopBtn = document.getElementById("toTopBtn");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      toTopBtn.style.display = "block";
+    } else {
+      toTopBtn.style.display = "none";
+    }
+  });
+
+  toTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  </body>
+</html>
