@@ -293,7 +293,7 @@
     <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2"></button>
   </div>
 
-  <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2500">
+  <div class="carousel slide" data-bs-ride="carousel" data-bs-interval="2500">
 
   <!-- 슬라이드 이미지 -->
   <div class="carousel-inner">
@@ -487,21 +487,7 @@
     document.getElementById("popupOverlay").style.display = "none";
   });
 </script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const carouselEl = document.querySelector("#mainCarousel");
-  const carousel = new bootstrap.Carousel(carouselEl, {
-    interval: 2800,
-    ride: false   // 자동 시작 막기
-  });
 
-  // 🔥 2.5초 후에 강제로 시작
-  setTimeout(() => {
-    carousel.cycle();
-  }, 2500);
-});
-</script>
 
 </body>
-
 </html>
