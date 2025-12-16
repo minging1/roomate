@@ -631,6 +631,19 @@ body { margin:0; font-family: 'pretendard', system-ui, -apple-system, 'Segoe UI'
 #b2 {
   margin-top: 40px;
 }
+.qw a {
+  display: block;          /* 클릭 영역 확장 */
+  padding: 10px 20px;      /* 마우스 올리기 쉬움 */
+}
+
+.qw a span {
+  display: inline-block;
+}
+
+.section-box {
+  position: relative;
+  z-index: 5;
+}
 
   </style>
 
@@ -958,5 +971,4 @@ function showSection(id) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
   </body>
-
 </html>
